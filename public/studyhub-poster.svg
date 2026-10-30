@@ -1,28 +1,28 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" fill="none">
-  <rect width="1600" height="900" fill="#F7F7F3"/>
+  <rect width="1600" height="900" fill="#FBF9FD"/>
   <path d="M0 0h1600v68H0z" fill="#fff"/>
   <path d="M0 68h1600" stroke="#DEDFD9" stroke-width="2"/>
-  <rect x="82" y="20" width="28" height="28" rx="6" fill="#5143A8"/>
+  <rect x="82" y="20" width="28" height="28" rx="6" fill="#73518E"/>
   <path d="M89 27h5v6h8v-6h5v15h-5v-5h-8v5h-5V27Z" fill="#fff"/>
   <text x="124" y="41" fill="#20211F" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="700">StudyHub</text>
   <text x="1230" y="40" fill="#686A66" font-family="Arial,Helvetica,sans-serif" font-size="14">A closer look · 02:01</text>
-  <text x="92" y="220" fill="#5143A8" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" letter-spacing="2.4">A MORE THOUGHTFUL WAY TO LEARN</text>
+  <text x="92" y="220" fill="#73518E" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" letter-spacing="2.4">A MORE THOUGHTFUL WAY TO LEARN</text>
   <text x="88" y="315" fill="#20211F" font-family="Georgia,serif" font-size="67">Start with a question.</text>
-  <text x="88" y="398" fill="#5143A8" font-family="Georgia,serif" font-size="67">Find your way forward.</text>
+  <text x="88" y="398" fill="#73518E" font-family="Georgia,serif" font-size="67">Find your way forward.</text>
   <text x="92" y="458" fill="#686A66" font-family="Arial,Helvetica,sans-serif" font-size="20">A product walkthrough of StudyHub</text>
   <g transform="translate(830 166)">
     <rect width="682" height="514" rx="10" fill="#fff" stroke="#D8D9D2" stroke-width="2"/>
     <path d="M0 58h682" stroke="#E4E5DF" stroke-width="2"/>
-    <text x="28" y="37" fill="#5143A8" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="700">YOUR STUDY SPACE</text>
+    <text x="28" y="37" fill="#73518E" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="700">YOUR STUDY SPACE</text>
     <text x="28" y="108" fill="#777972" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="700" letter-spacing="1.2">STUDY GUIDE</text>
     <text x="28" y="151" fill="#20211F" font-family="Georgia,serif" font-size="30">Introduction to neural networks</text>
     <text x="28" y="184" fill="#686A66" font-family="Arial,Helvetica,sans-serif" font-size="15">A clear path through the fundamentals.</text>
     <rect x="28" y="222" width="626" height="1" fill="#E4E5DF"/>
-    <circle cx="42" cy="264" r="6" fill="#5143A8"/><text x="62" y="269" fill="#343530" font-family="Arial,Helvetica,sans-serif" font-size="16">Explore the core ideas</text>
-    <circle cx="42" cy="316" r="6" fill="#758A68"/><text x="62" y="321" fill="#343530" font-family="Arial,Helvetica,sans-serif" font-size="16">Find helpful resources</text>
-    <circle cx="42" cy="368" r="6" fill="#BB805B"/><text x="62" y="373" fill="#343530" font-family="Arial,Helvetica,sans-serif" font-size="16">Test your understanding</text>
+    <circle cx="42" cy="264" r="6" fill="#73518E"/><text x="62" y="269" fill="#343530" font-family="Arial,Helvetica,sans-serif" font-size="16">Explore the core ideas</text>
+    <circle cx="42" cy="316" r="6" fill="#9C87B4"/><text x="62" y="321" fill="#343530" font-family="Arial,Helvetica,sans-serif" font-size="16">Find helpful resources</text>
+    <circle cx="42" cy="368" r="6" fill="#C47A87"/><text x="62" y="373" fill="#343530" font-family="Arial,Helvetica,sans-serif" font-size="16">Test your understanding</text>
     <rect x="28" y="413" width="626" height="1" fill="#E4E5DF"/>
-    <text x="28" y="455" fill="#5143A8" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700">ASK THE STUDY BUDDY</text>
+    <text x="28" y="455" fill="#73518E" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700">ASK THE STUDY BUDDY</text>
     <text x="28" y="483" fill="#777972" font-family="Arial,Helvetica,sans-serif" font-size="14">Keep exploring with a follow-up question.</text>
   </g>
   <path d="M0 760h1600" stroke="#DEDFD9" stroke-width="2"/>

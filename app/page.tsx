@@ -237,7 +237,7 @@ export default function Home() {
             </div>
             <div className="profile-intro" id="overview">
               <span className="section-kicker">Computer science · AI / ML</span>
-              <h1>Sarah<br />Pardeshi<span className="period">.</span></h1>
+              <h1>Sarah<br /><span className="name-accent">Pardeshi</span><span className="period">.</span></h1>
               <h2>Thoughtful software.<br />Useful applications of AI.</h2>
               <p>I’m a Computer Science undergraduate who enjoys building practical software and exploring how AI can make everyday tasks a little easier.</p>
               <div className="profile-actions"><a className="button primary" href="mailto:sarahpardeshi09@gmail.com">Get in touch <ArrowRight size={14} /></a><a className="text-link" href="https://linkedin.com/in/sarah-pardeshi" target="_blank" rel="noreferrer">LinkedIn <ArrowRight size={13} /></a></div>
