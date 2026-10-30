@@ -171,6 +171,26 @@ function StudySpace() {
   );
 }
 
+function FraudPreview() {
+  return (
+    <div className="project-visual fraud-visual" aria-label="Illustration of the fraud prediction workflow">
+      <div className="preview-heading"><span>PAYMENT REVIEW</span><span>RANDOM FOREST</span></div>
+      <div className="fraud-content"><div className="scatter"><i/><i/><i/><i/><i/><i/><i/><i/><i/><i/><b/></div><div className="model-notes"><strong>Model evaluation</strong><span>Precision</span><span>Recall</span><span>F1-score</span><span>Confusion matrix</span></div></div>
+      <div className="preview-foot"><span>Feature engineering</span><span>→</span><span>Preprocessing</span><span>→</span><span>Evaluation</span></div>
+    </div>
+  );
+}
+
+function CallPreview() {
+  return (
+    <div className="project-visual call-visual" aria-label="Illustration of a video call interface">
+      <div className="call-top"><span>Room · study group</span><span>•••</span></div>
+      <div className="call-body"><div className="call-screen"><div className="call-person"><i/><b/></div><div className="call-person warm"><i/><b/></div><div className="call-person lilac"><i/><b/></div><div className="call-person muted"><i/><b/></div></div><div className="call-chat"><strong>Messages</strong><i/><i/><i/><span>Write a message…</span></div></div>
+      <div className="call-controls"><i/><i/><i/><i/><b>Leave</b></div>
+    </div>
+  );
+}
+
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -241,7 +261,7 @@ export default function Home() {
           <div className="container resume-grid"><div><span className="section-kicker">Resume snapshot</span><h2>What I bring<br />to a team.</h2><p className="resume-summary">I enjoy learning by building—working across AI, machine learning, and full-stack applications, and turning early ideas into useful software.</p></div><div className="resume-details"><div className="resume-row"><span>01</span><div><strong>AI &amp; machine learning</strong><p>Generative AI, Python, machine learning, and practical experimentation.</p></div></div><div className="resume-row"><span>02</span><div><strong>Full-stack development</strong><p>MERN stack applications, real-time collaboration, and product-focused interfaces.</p></div></div><div className="resume-row"><span>03</span><div><strong>Education</strong><p>B.Sc. Computer Science Honours · Somaiya Vidyavihar University · 2027</p></div></div></div></div>
         </section>
 
-        <section className="section projects-section"><div className="container"><div className="section-heading"><span className="section-kicker">Selected work · 02–03</span><h2>Other things I’ve built.</h2></div><div className="projects-grid"><article className="project-card"><span>Machine learning</span><h3>Online Payment Fraud Prediction</h3><p>Random Forest-based fraud detection, with feature engineering, preprocessing, and evaluation using precision, recall, F1-score, and a confusion matrix.</p></article><article className="project-card"><span>Real-time collaboration</span><h3>Video Conferencing Platform</h3><p>A MERN-based application with WebRTC, Socket.io, video calls, chat, screen sharing, and collaborative features.</p></article></div></div></section>
+        <section className="section projects-section"><div className="container"><div className="section-heading"><span className="section-kicker">Selected work · 02–03</span><h2>Other things I’ve built.</h2></div><div className="projects-grid"><article className="project-card"><FraudPreview /><div className="project-copy"><span>Machine learning</span><h3>Online Payment Fraud Prediction</h3><p>Random Forest-based fraud detection, with feature engineering, preprocessing, and evaluation using precision, recall, F1-score, and a confusion matrix.</p></div></article><article className="project-card"><CallPreview /><div className="project-copy"><span>Real-time collaboration</span><h3>Video Conferencing Platform</h3><p>A MERN-based application with WebRTC, Socket.io, video calls, chat, screen sharing, and collaborative features.</p></div></article></div></div></section>
 
         <section className="about-section" id="about"><div className="container about-inner"><div><span className="section-kicker">A little about me</span><h2>Curious by nature.<br />Practical by design.</h2></div><div><p>I’m a Computer Science undergraduate interested in building practical AI-powered applications and intelligent software systems. I enjoy exploring how emerging technologies can solve everyday problems through thoughtful engineering and user-focused design.</p><div className="about-tags"><span>Python</span><span>Machine learning</span><span>Generative AI</span><span>MERN stack</span><span>Problem-solving</span></div></div></div></section>
 
