@@ -2,9 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import {
-  ArrowRight, BookOpen, Brain, Check, CircleHelp, Code2, GraduationCap,
-  Github, Library, Linkedin, Menu, MessageCircle, Pause, Play, Search,
-  Sparkles, Target, Volume2, VolumeX, X, Zap,
+  ArrowRight, BookOpen, Brain, Check, CircleHelp, Github, Library, Linkedin,
+  Menu, MessageCircle, Pause, Play, Search, Sparkles, Target, Volume2, VolumeX, X,
 } from "lucide-react";
 
 const features = [
@@ -198,81 +197,57 @@ export default function Home() {
       <div className="progress" style={{ transform: `scaleX(${progress})` }} />
       <nav className="site-nav">
         <div className="nav-inner">
-          <a className="brand" href="#top" aria-label="StudyHub home"><span className="brand-mark"><BookOpen /></span>StudyHub</a>
+          <a className="brand" href="#top" aria-label="Sarah Pardeshi home"><span className="brand-mark">SP</span><span>Sarah Pardeshi <small>PORTFOLIO · 2026</small></span></a>
           <button className="menu-toggle" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X /> : <Menu />}</button>
           <div className={`nav-links ${menuOpen ? "open" : ""}`}>
-            <a href="#overview" onClick={closeMenu}>Overview</a>
-            <a href="#features" onClick={closeMenu}>Features</a>
-            <a href="#technology" onClick={closeMenu}>Technology</a>
-            <a href="#about" onClick={closeMenu}>About Sarah</a>
-            <a className="nav-cta" href="#demo" onClick={closeMenu}><Play size={12} /> Watch demo</a>
+            <a href="#work" onClick={closeMenu}>Work</a>
+            <a href="#resume" onClick={closeMenu}>Resume</a>
+            <a href="#about" onClick={closeMenu}>About</a>
+            <a className="nav-cta" href="mailto:sarahpardeshi09@gmail.com" onClick={closeMenu}>Contact Sarah <ArrowRight size={13} /></a>
           </div>
         </div>
       </nav>
 
       <main id="top">
-        <section className="video-section" id="demo" aria-label="StudyHub product walkthrough">
+        <section className="portfolio-hero">
+          <div className="container portfolio-grid">
+            <div className="featured-video" id="demo">
+              <VideoPlayer />
+              <div className="video-caption"><span>FEATURED PROJECT · STUDYHUB</span><span>PRODUCT WALKTHROUGH&nbsp; 02:01</span></div>
+            </div>
+            <div className="profile-intro" id="overview">
+              <span className="section-kicker">Computer science · AI / ML</span>
+              <h1>Sarah<br />Pardeshi<span className="period">.</span></h1>
+              <h2>Thoughtful software.<br />Useful applications of AI.</h2>
+              <p>I’m a Computer Science undergraduate who enjoys building practical software and exploring how AI can make everyday tasks a little easier.</p>
+              <div className="profile-actions"><a className="button primary" href="mailto:sarahpardeshi09@gmail.com">Get in touch <ArrowRight size={14} /></a><a className="text-link" href="https://linkedin.com/in/sarah-pardeshi" target="_blank" rel="noreferrer">LinkedIn <ArrowRight size={13} /></a></div>
+              <div className="profile-credit">Currently studying at <strong>Somaiya Vidyavihar University</strong></div>
+            </div>
+          </div>
+          <div className="container quick-facts"><div><span>EDUCATION</span><strong>B.Sc. Computer Science Honours</strong></div><div><span>UNIVERSITY</span><strong>Somaiya Vidyavihar University</strong></div><div><span>GRADUATION</span><strong>2027</strong></div><div><span>CGPA</span><strong>9.77</strong></div></div>
+        </section>
+
+        <section className="section work-section" id="work">
           <div className="container">
-            <VideoPlayer />
-            <div className="video-intro">
-              <span className="section-kicker">A two-minute walkthrough · 02:01</span>
-              <h1>See StudyHub in action.</h1>
-              <p>From a learning question to a study guide, a quiz, and a place to keep it all.</p>
+            <div className="section-heading"><span className="section-kicker">Selected work · 01</span><h2>StudyHub</h2><p>An AI-powered learning platform that brings study guides, quizzes, helpful resources, and AI-assisted explanations into one connected experience.</p></div>
+            <div className="study-project-grid">
+              <div className="study-project-copy"><h3>From a topic to a place to learn.</h3><p>StudyHub is a learning product I developed to make the first steps into a new subject feel more organised and engaging.</p><div className="capability-list">{features.map(({ icon: Icon, title, body }) => <div className="capability" key={title}><Icon /><div><strong>{title}</strong><span>{body}</span></div></div>)}</div><a className="text-link" href="https://github.com/Harsh-2203/Study_Hub" target="_blank" rel="noreferrer">View project repository <ArrowRight size={13} /></a></div>
+              <StudySpace />
             </div>
           </div>
         </section>
 
-        <section className="hero section" id="overview">
-          <div className="container hero-grid">
-            <div className="hero-copy-block">
-              <span className="section-kicker">An AI-powered learning experience</span>
-              <h2>Stop searching.<br /><span>Start learning.</span></h2>
-              <p>StudyHub turns a topic search into a structured, interactive learning experience, bringing study material, questions, and useful resources together.</p>
-              <a className="button primary" href="#features">Explore the platform <ArrowRight size={15} /></a>
-              <div className="creator">Designed &amp; developed by <strong>Sarah Pardeshi</strong></div>
-            </div>
-            <StudySpace />
-          </div>
+        <section className="section resume-section" id="resume">
+          <div className="container resume-grid"><div><span className="section-kicker">Resume snapshot</span><h2>What I bring<br />to a team.</h2><p className="resume-summary">I enjoy learning by building—working across AI, machine learning, and full-stack applications, and turning early ideas into useful software.</p></div><div className="resume-details"><div className="resume-row"><span>01</span><div><strong>AI &amp; machine learning</strong><p>Generative AI, Python, machine learning, and practical experimentation.</p></div></div><div className="resume-row"><span>02</span><div><strong>Full-stack development</strong><p>MERN stack applications, real-time collaboration, and product-focused interfaces.</p></div></div><div className="resume-row"><span>03</span><div><strong>Education</strong><p>B.Sc. Computer Science Honours · Somaiya Vidyavihar University · 2027</p></div></div></div></div>
         </section>
 
-        <section className="section" id="features">
-          <div className="container">
-            <div className="section-heading"><span className="section-kicker">The learning space</span><h2>Everything in one place.</h2><p>Each part of the experience is designed to help you stay with the subject you came to learn.</p></div>
-            <div className="feature-list">
-              {features.map(({ icon: Icon, title, body }, index) => (
-                <article className="feature-row" key={title}><span className="feature-number">0{index + 1}</span><span className="feature-icon"><Icon /></span><div><h3>{title}</h3><p>{body}</p></div></article>
-              ))}
-            </div>
-          </div>
-        </section>
+        <section className="section projects-section"><div className="container"><div className="section-heading"><span className="section-kicker">Selected work · 02–03</span><h2>Other things I’ve built.</h2></div><div className="projects-grid"><article className="project-card"><span>Machine learning</span><h3>Online Payment Fraud Prediction</h3><p>Random Forest-based fraud detection, with feature engineering, preprocessing, and evaluation using precision, recall, F1-score, and a confusion matrix.</p></article><article className="project-card"><span>Real-time collaboration</span><h3>Video Conferencing Platform</h3><p>A MERN-based application with WebRTC, Socket.io, video calls, chat, screen sharing, and collaborative features.</p></article></div></div></section>
 
-        <section className="section story-section">
-          <div className="container story-grid">
-            <article className="story-panel"><span className="section-kicker">Before</span><h2>Too many tabs.<br />Too little momentum.</h2><p>Learning something new can mean switching between search results, videos, books, and notes before the learning even begins.</p><div className="tabs-scattered"><span>Search results · neural networks</span><span>Video lecture · 18 min</span><span>Book chapter · AI</span><span>Study notes (draft)</span><span>Quiz questions</span></div></article>
-            <article className="story-panel solution-panel"><span className="section-kicker">With StudyHub</span><h2>A place to follow<br />the thread.</h2><p>Study guides, quizzes, helpful resources, and AI-assisted explanations share one connected learning space.</p><div className="organized-ui"><div className="ui-head">Neural networks · Study guide</div><div className="ui-line"><i /> Foundations · 6 sections</div><div className="ui-line"><i /> Knowledge check · 8 questions</div><div className="ui-line"><i /> Study Buddy · follow-up chat</div></div></article>
-          </div>
-        </section>
+        <section className="about-section" id="about"><div className="container about-inner"><div><span className="section-kicker">A little about me</span><h2>Curious by nature.<br />Practical by design.</h2></div><div><p>I’m a Computer Science undergraduate interested in building practical AI-powered applications and intelligent software systems. I enjoy exploring how emerging technologies can solve everyday problems through thoughtful engineering and user-focused design.</p><div className="about-tags"><span>Python</span><span>Machine learning</span><span>Generative AI</span><span>MERN stack</span><span>Problem-solving</span></div></div></div></section>
 
-        <section className="section" id="technology">
-          <div className="container tech-grid">
-            <div className="tech-copy"><span className="section-kicker">Under the surface</span><h2>Built with technology.<br />Designed around people.</h2><p>A familiar web stack and generative AI come together to organise a more approachable learning experience.</p><div className="tech-list"><span>MongoDB</span><span>Express.js</span><span>React.js</span><span>Node.js</span><span>Generative AI / LLM API</span></div></div>
-            <div className="flow" aria-label="Product architecture flow"><div className="flow-row"><div className="flow-node"><GraduationCap /><span>User input</span></div><i>→</i><div className="flow-node"><Code2 /><span>React frontend</span></div><i>→</i><div className="flow-node"><Zap /><span>Node.js / Express</span></div></div><div className="flow-bottom"><div className="flow-node"><Brain /><span>AI integration</span></div><i>→</i><div className="flow-node"><BookOpen /><span>Structured learning · MongoDB</span></div></div><p className="flow-note">From a learning question to a connected study experience.</p></div>
-          </div>
-        </section>
-
-        <section className="section dev-section" id="about">
-          <div className="container"><div className="section-heading"><span className="section-kicker">The person behind StudyHub</span><h2>Meet Sarah.</h2></div>
-            <div className="dev-card"><aside className="dev-aside"><div className="avatar-art">SP</div><h3>Sarah Pardeshi</h3><p>Computer Science undergraduate<br />AI/ML · Python · Machine Learning</p><div className="social-links"><a href="https://linkedin.com/in/sarah-pardeshi" target="_blank" rel="noreferrer" aria-label="Sarah on LinkedIn"><Linkedin /></a><a href="https://github.com/Sarahpardeshi" target="_blank" rel="noreferrer" aria-label="Sarah on GitHub"><Github /></a></div></aside>
-              <div className="dev-main"><h3>Curiosity, turned into software.</h3><p>I&apos;m a Computer Science undergraduate interested in building practical AI-powered applications and intelligent software systems. I enjoy exploring how emerging technologies can solve everyday problems through thoughtful engineering and user-focused design.</p><div className="skill-pills"><span>AI/ML &amp; Generative AI</span><span>Python &amp; Machine Learning</span><span>MERN Stack Development</span><span>AI-powered applications</span><span>Problem-solving &amp; experimentation</span></div><div className="academic"><div>Somaiya Vidyavihar University<span>B.Sc. Computer Science Honours</span></div><div>Graduation · 2027<span>CGPA · 9.77</span></div></div></div>
-            </div>
-          </div>
-        </section>
-
-        <section className="section projects-section"><div className="container"><div className="section-heading"><span className="section-kicker">A few more things I’ve built</span><h2>More experiments.<br />More problem-solving.</h2></div><div className="projects-grid"><article className="project-card"><span>Machine learning</span><h3>Online Payment Fraud Prediction</h3><p>Random Forest-based fraud detection, with feature engineering, preprocessing, and evaluation using precision, recall, F1-score, and a confusion matrix.</p></article><article className="project-card"><span>Real-time collaboration</span><h3>Video Conferencing Platform</h3><p>A MERN-based application with WebRTC, Socket.io, video calls, chat, screen sharing, and collaborative features.</p></article></div></div></section>
-
-        <section className="cta-section"><div className="container"><span className="section-kicker">Get in touch</span><h2>Curious about what we could build next?</h2><p>I&apos;m always interested in exploring new ideas, building intelligent systems, and solving meaningful problems with technology.</p><div className="cta-actions"><a className="button primary" href="https://linkedin.com/in/sarah-pardeshi" target="_blank" rel="noreferrer">Connect on LinkedIn <Linkedin size={14} /></a><a className="button" href="https://github.com/Sarahpardeshi" target="_blank" rel="noreferrer">Explore GitHub <Github size={14} /></a><a className="button" href="mailto:sarahpardeshi09@gmail.com">Email Sarah <ArrowRight size={14} /></a></div></div></section>
+        <section className="cta-section"><div className="container"><span className="section-kicker">Contact</span><h2>Let’s make something useful.</h2><p>Interested in AI, automation, or thoughtful software? I’d be glad to connect.</p><div className="cta-actions"><a className="button primary" href="mailto:sarahpardeshi09@gmail.com">sarahpardeshi09@gmail.com <ArrowRight size={14} /></a><a className="button" href="https://github.com/Sarahpardeshi" target="_blank" rel="noreferrer">GitHub <Github size={14} /></a><a className="button" href="https://linkedin.com/in/sarah-pardeshi" target="_blank" rel="noreferrer">LinkedIn <Linkedin size={14} /></a></div></div></section>
       </main>
-      <footer className="footer"><div className="footer-inner"><span>© 2026 Sarah Pardeshi · StudyHub</span><a href="#top">Back to top ↑</a></div></footer>
+      <footer className="footer"><div className="footer-inner"><span>Sarah Pardeshi · Portfolio</span><a href="#top">Back to top ↑</a></div></footer>
     </>
   );
 }
