@@ -1,43 +1,278 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ArrowDown, ArrowRight, BookOpen, Brain, Check, ChevronRight, CircleHelp, Code2, ExternalLink, Github, GraduationCap, Headphones, Library, Linkedin, Menu, MessageCircle, Pause, Play, Search, Sparkles, Target, Volume2, VolumeX, X, Zap } from "lucide-react";
+import {
+  ArrowRight, BookOpen, Brain, Check, CircleHelp, Code2, GraduationCap,
+  Github, Library, Linkedin, Menu, MessageCircle, Pause, Play, Search,
+  Sparkles, Target, Volume2, VolumeX, X, Zap,
+} from "lucide-react";
 
 const features = [
-  { icon: Brain, title: "AI Study Engine", body: "Turn a learning topic into structured study guides and clear explanations.", art: "sheet" },
-  { icon: Check, title: "Interactive Quizzes", body: "Check your understanding with quizzes built around what you’re learning.", art: "quiz" },
-  { icon: MessageCircle, title: "AI Study Buddy", body: "Ask follow-up questions and get AI-assisted explanations as you study.", art: "buddy" },
-  { icon: Search, title: "Unified Resource Discovery", body: "Explore YouTube videos, Google Books, and web resources in one place.", art: "resource" },
-  { icon: Library, title: "Personal Learning Library", body: "Keep saved content, search history, quiz scores, and AI chats together.", art: "library" },
-  { icon: Target, title: "Personalized Learning", body: "A more organised, focused space for the way you explore new ideas.", art: "personal" },
+  { icon: Brain, title: "AI Study Engine", body: "Turn a learning topic into structured study guides and clear explanations." },
+  { icon: Check, title: "Interactive Quizzes", body: "Check your understanding with quizzes built around what you’re learning." },
+  { icon: MessageCircle, title: "AI Study Buddy", body: "Ask follow-up questions and get AI-assisted explanations as you study." },
+  { icon: Search, title: "Resource discovery", body: "Explore YouTube videos, Google Books, and web resources in one place." },
+  { icon: Library, title: "Personal learning library", body: "Keep saved content, search history, quiz scores, and AI chats together." },
+  { icon: Target, title: "A more personal way to learn", body: "A focused space for the way you explore new ideas." },
 ];
 
-function ProductMock() { return <div className="hero-visual"><div className="orb"/><div className="mock-window"><div className="mock-top"><span className="mock-brand"><i className="mini-logo"><BookOpen size={10}/></i> studyhub</span><span>My learning space</span><span className="mock-dots"><i/><i/><i/></span></div><div className="mock-content"><div className="mock-greeting">YOUR AI LEARNING SPACE</div><h3>What would you like to learn?</h3><div className="topic-card"><div><strong>Introduction to neural networks</strong><small>Your personalised study guide is ready</small></div><span className="topic-icon"><Sparkles/></span></div><div className="mock-label">CONTINUE EXPLORING</div><div className="mock-row"><div className="mock-tile"><span><BookOpen/> Study guide</span><div/></div><div className="mock-tile"><span><CircleHelp/> Quick quiz</span><div/></div></div><div className="mock-bottom"><div><b>AI Study Buddy</b><br/>Ask a follow-up question...</div><div><b>Saved resources</b><br/>3 items in your library</div></div></div></div><div className="float-chip chip-one"><Sparkles/> AI study guide ready</div><div className="float-chip chip-two"><Check/> Quiz · 8 questions</div></div>; }
-
-function FeatureArt({ kind }: { kind: string }) { if(kind==="sheet") return <div className="mini-sheet"><i/><i/><i/></div>; if(kind==="quiz") return <div className="quiz-visual"><i/><i/><i/><i/></div>; if(kind==="buddy") return <div className="buddy-visual"><i/><i/></div>; if(kind==="resource") return <div className="resource-visual"><i>YT</i><i>BK</i><i>WEB</i></div>; if(kind==="library") return <div className="library-visual"><i/><i/><i/></div>; return <div className="personal-visual"><i/><i/><i/><i/></div>; }
-
 function VideoPlayer() {
-  const videoRef = useRef<HTMLVideoElement>(null); const timelineRef = useRef<HTMLDivElement>(null);
-  const [playing,setPlaying]=useState(false),[current,setCurrent]=useState(0),[duration,setDuration]=useState(121),[volume,setVolume]=useState(0.8),[muted,setMuted]=useState(false),[speed,setSpeed]=useState(1),[ready,setReady]=useState(false);
-  const format=(n:number)=>`${Math.floor(n/60).toString().padStart(2,"0")}:${Math.floor(n%60).toString().padStart(2,"0")}`;
-  const toggle=()=>{const v=videoRef.current;if(!v)return;if(v.paused){void v.play();setPlaying(true)}else{v.pause();setPlaying(false)}};
-  useEffect(()=>{const v=videoRef.current;if(v)v.playbackRate=speed},[speed]);
-  const seek=(e:React.MouseEvent<HTMLDivElement>)=>{if(!videoRef.current||!timelineRef.current)return;const r=timelineRef.current.getBoundingClientRect();const pct=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width));videoRef.current.currentTime=pct*duration;setCurrent(pct*duration)};
-  return <div className="video-shell"><div className="video-stage" onKeyDown={e=>{if(e.key===" "||e.key==="Enter"){e.preventDefault();toggle()}}} tabIndex={0} aria-label="StudyHub product walkthrough video player"><video ref={videoRef} src="/videos/studyhub-demo.mp4" playsInline preload="metadata" onLoadedMetadata={e=>{const d=e.currentTarget.duration;if(Number.isFinite(d))setDuration(d);setReady(true)}} onTimeUpdate={e=>setCurrent(e.currentTarget.currentTime)} onEnded={()=>setPlaying(false)} onPlay={()=>setPlaying(true)} onPause={()=>setPlaying(false)} aria-label="StudyHub product walkthrough"/><button className={`video-overlay ${playing?"hidden":""}`} onClick={toggle} aria-label="Play StudyHub demo"><span className="play-button"><Play fill="currentColor"/></span></button>{!ready&&<span className="video-pill" style={{position:"absolute",top:12,left:12,margin:0}}>Loading video…</span>}</div><div className="video-controls"><button className="control-btn" aria-label={playing?"Pause":"Play"} onClick={toggle}>{playing?<Pause fill="currentColor"/>:<Play fill="currentColor"/>}</button><span className="time-text">{format(current)}</span><div className="timeline" ref={timelineRef} onClick={seek} role="slider" aria-label="Video position" aria-valuemin={0} aria-valuemax={Math.round(duration)} aria-valuenow={Math.round(current)} tabIndex={0} onKeyDown={e=>{if(videoRef.current&&e.key==="ArrowRight")videoRef.current.currentTime=Math.min(duration,current+5);if(videoRef.current&&e.key==="ArrowLeft")videoRef.current.currentTime=Math.max(0,current-5)}}><div className="timeline-fill" style={{width:`${duration?current/duration*100:0}%`}}/></div><span className="time-text">{format(duration)}</span><div className="volume-wrap"><button className="control-btn" aria-label={muted?"Unmute":"Mute"} onClick={()=>{const v=videoRef.current;if(v){v.muted=!muted;setMuted(!muted)}}}>{muted||volume===0?<VolumeX/>:<Volume2/>}</button><input className="volume-slider" aria-label="Volume" type="range" min="0" max="1" step="0.05" value={muted?0:volume} onChange={e=>{const n=Number(e.target.value);setVolume(n);setMuted(n===0);if(videoRef.current)videoRef.current.volume=n}}/></div><select className="speed-select" value={speed} aria-label="Playback speed" onChange={e=>setSpeed(Number(e.target.value))}><option value="0.75">0.75×</option><option value="1">1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="2">2×</option></select><button className="control-btn" aria-label="Fullscreen" onClick={()=>{const v=videoRef.current;if(v){if(document.fullscreenElement)void document.exitFullscreen();else void v.requestFullscreen()}}}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" width="16" height="16"><path d="M8 3H5a2 2 0 0 0-2 2v3m13-5h3a2 2 0 0 1 2 2v3M3 16v3a2 2 0 0 0 2 2h3m13-5v3a2 2 0 0 1-2 2h-3"/></svg></button></div></div>;
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const [playing, setPlaying] = useState(false);
+  const [current, setCurrent] = useState(0);
+  const [duration, setDuration] = useState(121);
+  const [volume, setVolume] = useState(0.8);
+  const [muted, setMuted] = useState(false);
+  const [speed, setSpeed] = useState(1);
+
+  const formatTime = (time: number) => `${Math.floor(time / 60).toString().padStart(2, "0")}:${Math.floor(time % 60).toString().padStart(2, "0")}`;
+  const togglePlayback = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) void video.play();
+    else video.pause();
+  };
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = speed;
+      videoRef.current.volume = volume;
+    }
+  }, [speed, volume]);
+
+  const seek = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (!videoRef.current || !timelineRef.current) return;
+    const rect = timelineRef.current.getBoundingClientRect();
+    const fraction = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
+    videoRef.current.currentTime = fraction * duration;
+    setCurrent(fraction * duration);
+  };
+
+  return (
+    <div className="video-shell">
+      <div
+        className="video-stage"
+        tabIndex={0}
+        aria-label="StudyHub product walkthrough video player"
+        onKeyDown={(event) => {
+          if (event.key === " " || event.key === "Enter") {
+            event.preventDefault();
+            togglePlayback();
+          }
+        }}
+      >
+        <video
+          ref={videoRef}
+          src="/videos/studyhub-demo.mp4"
+          poster="/studyhub-poster.svg"
+          playsInline
+          preload="metadata"
+          onLoadedMetadata={(event) => {
+            if (Number.isFinite(event.currentTarget.duration)) setDuration(event.currentTarget.duration);
+          }}
+          onTimeUpdate={(event) => setCurrent(event.currentTarget.currentTime)}
+          onPlay={() => setPlaying(true)}
+          onPause={() => setPlaying(false)}
+          onEnded={() => setPlaying(false)}
+          aria-label="StudyHub product walkthrough"
+        />
+        {!playing && (
+          <button className="video-overlay" onClick={togglePlayback} aria-label="Play StudyHub demo">
+            <span className="play-button"><Play fill="currentColor" /></span>
+          </button>
+        )}
+      </div>
+      <div className="video-controls">
+        <button className="control-btn" aria-label={playing ? "Pause" : "Play"} onClick={togglePlayback}>
+          {playing ? <Pause fill="currentColor" /> : <Play fill="currentColor" />}
+        </button>
+        <span className="time-text">{formatTime(current)}</span>
+        <div
+          className="timeline"
+          ref={timelineRef}
+          onClick={seek}
+          role="slider"
+          aria-label="Video position"
+          aria-valuemin={0}
+          aria-valuemax={Math.round(duration)}
+          aria-valuenow={Math.round(current)}
+          tabIndex={0}
+          onKeyDown={(event) => {
+            if (!videoRef.current) return;
+            if (event.key === "ArrowRight") videoRef.current.currentTime = Math.min(duration, current + 5);
+            if (event.key === "ArrowLeft") videoRef.current.currentTime = Math.max(0, current - 5);
+          }}
+        >
+          <div className="timeline-fill" style={{ width: `${duration ? (current / duration) * 100 : 0}%` }} />
+        </div>
+        <span className="time-text">{formatTime(duration)}</span>
+        <div className="volume-wrap">
+          <button
+            className="control-btn"
+            aria-label={muted ? "Unmute" : "Mute"}
+            onClick={() => {
+              if (!videoRef.current) return;
+              videoRef.current.muted = !muted;
+              setMuted(!muted);
+            }}
+          >{muted || volume === 0 ? <VolumeX /> : <Volume2 />}</button>
+          <input
+            className="volume-slider"
+            aria-label="Volume"
+            type="range"
+            min="0"
+            max="1"
+            step="0.05"
+            value={muted ? 0 : volume}
+            onChange={(event) => {
+              const nextVolume = Number(event.target.value);
+              setVolume(nextVolume);
+              setMuted(nextVolume === 0);
+              if (videoRef.current) {
+                videoRef.current.volume = nextVolume;
+                videoRef.current.muted = nextVolume === 0;
+              }
+            }}
+          />
+        </div>
+        <select className="speed-select" value={speed} aria-label="Playback speed" onChange={(event) => setSpeed(Number(event.target.value))}>
+          <option value="0.75">0.75×</option><option value="1">1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="2">2×</option>
+        </select>
+        <button
+          className="control-btn"
+          aria-label="Fullscreen"
+          onClick={() => {
+            const video = videoRef.current;
+            if (!video) return;
+            if (document.fullscreenElement) void document.exitFullscreen();
+            else void video.requestFullscreen();
+          }}
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" width="16" height="16" aria-hidden="true">
+            <path d="M8 3H5a2 2 0 0 0-2 2v3m13-5h3a2 2 0 0 1 2 2v3M3 16v3a2 2 0 0 0 2 2h3m13-5v3a2 2 0 0 1-2 2h-3" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  );
 }
 
-export default function Home(){
- const [menuOpen,setMenuOpen]=useState(false),[progress,setProgress]=useState(0);
- useEffect(()=>{const update=()=>{const d=document.documentElement;setProgress(d.scrollHeight-d.clientHeight?d.scrollTop/(d.scrollHeight-d.clientHeight):0)};window.addEventListener("scroll",update,{passive:true});return()=>window.removeEventListener("scroll",update)},[]);
- useEffect(()=>{const handler=(e:KeyboardEvent)=>{if(e.key==="Escape")setMenuOpen(false)};window.addEventListener("keydown",handler);return()=>window.removeEventListener("keydown",handler)},[]);
- const close=()=>setMenuOpen(false);
- return <><div className="progress" style={{transform:`scaleX(${progress})`}}/><nav className="site-nav"><div className="nav-inner"><a className="brand" href="#top" aria-label="StudyHub home"><span className="brand-mark"><BookOpen/></span>StudyHub</a><button className="menu-toggle" aria-label={menuOpen?"Close menu":"Open menu"} aria-expanded={menuOpen} onClick={()=>setMenuOpen(!menuOpen)}>{menuOpen?<X/>:<Menu/>}</button><div className={`nav-links ${menuOpen?"open":""}`}><a href="#overview" onClick={close}>Overview</a><a href="#features" onClick={close}>Features</a><a href="#technology" onClick={close}>Technology</a><a href="#about" onClick={close}>About Developer</a><a className="nav-cta" href="#demo" onClick={close}><Play size={12}/> Watch Demo</a></div></div></nav>
- <main id="top"><section className="hero" id="overview"><div className="hero-grid"><div className="hero-content"><div className="eyebrow reveal"><i className="dot"/> An AI-powered learning experience</div><h1 className="reveal delay">Stop searching.<br/><span>Start learning.</span></h1><p className="hero-copy reveal delay2">Meet StudyHub — an AI-powered platform that transforms a simple topic search into a structured, interactive, and personalized learning experience.</p><div className="hero-actions reveal delay2"><a className="button primary" href="#demo">Explore the Demo <ArrowRight size={14}/></a><a className="button" href="https://github.com/Sarahpardeshi" target="_blank" rel="noreferrer">View on GitHub <Github size={14}/></a></div><div className="creator">Designed &amp; Developed by <b>Sarah Pardeshi</b></div></div><ProductMock/></div><div className="hero-foot">A more thoughtful way to learn</div></section>
- <section className="section video-section" id="demo"><div className="container"><div className="section-head"><div className="section-kicker">A closer look</div><h2>See StudyHub in action.</h2><p>A closer look at how AI can make learning more structured, accessible, and interactive.</p><div className="video-pill">PRODUCT WALKTHROUGH · 02:01</div></div><VideoPlayer/><p className="video-caption">Built to turn curiosity into structured learning.</p></div></section>
- <section className="section" id="features"><div className="container"><div className="section-head"><div className="section-kicker">Made for the way you learn</div><h2>Everything you need to learn.<br/>In one place.</h2><p>From the first question to a saved study guide, StudyHub keeps the learning journey connected.</p></div><div className="feature-grid">{features.map(({icon:Icon,title,body,art},i)=><article className="feature-card" key={title}><span className="feature-icon"><Icon/></span><h3>{title}</h3><p>{body}</p><FeatureArt kind={art}/></article>)}</div></div></section>
- <section className="section story-section"><div className="container"><div className="section-head"><div className="section-kicker">The shift</div><h2>Less collecting.<br/>More understanding.</h2></div><div className="story-grid"><article className="story-card"><div className="story-label">THE PROBLEM</div><h3>Learning gets scattered.</h3><p>Learning something new often means opening 10–15 tabs, switching between platforms, collecting resources, and losing focus before learning even begins.</p><div className="tabs-scattered"><span className="tab">Search results — neural networks</span><span className="tab">Video lecture · 18 min</span><span className="tab">Book chapter · AI</span><span className="tab">Study notes (draft)</span><span className="tab">Quiz questions</span><span className="tab">More results…</span></div></article><article className="story-card"><div className="story-label">THE SOLUTION</div><h3>One connected learning space.</h3><p>StudyHub brings learning resources, AI-generated study material, interactive quizzes, and learning assistance into one connected experience.</p><div className="organized-ui"><div className="ui-head">Your study space · Neural networks</div><div className="ui-line"><i/>Study guide · Foundations</div><div className="ui-line"><i/>Interactive quiz · 8 questions</div><div className="ui-line"><i/>AI Study Buddy · 2 chats</div></div></article></div></div></section>
- <section className="section" id="technology"><div className="container tech-grid"><div className="tech-copy"><div className="section-kicker">The technology</div><h2>Built with technology.<br/>Designed around people.</h2><p>A familiar web stack and generative AI come together to organise a more approachable learning experience.</p><div className="tech-list"><span className="tech-badge">MongoDB</span><span className="tech-badge">Express.js</span><span className="tech-badge">React.js</span><span className="tech-badge">Node.js</span><span className="tech-badge">Generative AI / LLM API</span></div></div><div className="flow" aria-label="Product architecture flow"><div className="flow-row"><div className="flow-node"><GraduationCap/><span>User Input</span></div><i className="flow-arrow">→</i><div className="flow-node"><Code2/><span>React Frontend</span></div><i className="flow-arrow">→</i><div className="flow-node"><Zap/><span>Node.js / Express</span></div></div><div className="flow-bottom"><div className="flow-node"><Brain/><span>AI Integration</span></div><i className="flow-arrow">→</i><div className="flow-node"><BookOpen/><span>Structured Learning · MongoDB</span></div></div><div className="flow-note">From a learning question to a connected study experience</div></div></div></section>
- <section className="section dev-section" id="about"><div className="container"><div className="section-head"><div className="section-kicker">The person behind the product</div><h2>Meet the developer<br/>behind StudyHub.</h2></div><div className="dev-card"><aside className="dev-aside"><div className="avatar-art">SP</div><h3>Sarah Pardeshi</h3><p className="role">Computer Science Undergraduate<br/>AI/ML · Python · Machine Learning</p><div className="social-links"><a href="https://linkedin.com/in/sarah-pardeshi" target="_blank" rel="noreferrer" aria-label="Sarah on LinkedIn"><Linkedin/></a><a href="https://github.com/Sarahpardeshi" target="_blank" rel="noreferrer" aria-label="Sarah on GitHub"><Github/></a></div></aside><div className="dev-main"><h3>Curiosity, turned into software.</h3><p>I&apos;m a Computer Science undergraduate interested in building practical AI-powered applications and intelligent software systems. I enjoy exploring how emerging technologies can solve everyday problems through thoughtful engineering and user-focused design.</p><div className="skill-pills"><span>AI/ML &amp; Generative AI</span><span>Python &amp; Machine Learning</span><span>MERN Stack Development</span><span>AI-powered applications</span><span>Problem-solving &amp; experimentation</span></div><div className="academic"><div>Somaiya Vidyavihar University<span>B.Sc. Computer Science Honours</span></div><div>Graduation · 2027<span>CGPA · 9.77</span></div></div></div></div></div></section>
- <section className="section"><div className="container"><div className="section-head"><div className="section-kicker">A few more things I&apos;ve built</div><h2>More experiments.<br/>More problem-solving.</h2></div><div className="projects-grid"><article className="project-card"><div className="project-type">Machine learning</div><h3>Online Payment Fraud Prediction</h3><p>Random Forest-based fraud detection, with feature engineering, preprocessing, and evaluation using precision, recall, F1-score, and a confusion matrix.</p></article><article className="project-card"><div className="project-type">Real-time collaboration</div><h3>Video Conferencing Platform</h3><p>A MERN-based application with WebRTC, Socket.io, video calls, chat, screen sharing, and collaborative features.</p></article></div></div></section>
- <section className="cta-section"><div className="section-kicker">Let&apos;s build something meaningful</div><h2>Curious about what we could build next?</h2><p>I&apos;m always interested in exploring new ideas, building intelligent systems, and solving meaningful problems with technology.</p><div className="cta-actions"><a className="button primary" href="https://linkedin.com/in/sarah-pardeshi" target="_blank" rel="noreferrer">Connect on LinkedIn <Linkedin size={13}/></a><a className="button" href="https://github.com/Sarahpardeshi" target="_blank" rel="noreferrer">Explore GitHub <Github size={13}/></a><a className="button" href="mailto:sarahpardeshi09@gmail.com">Email Sarah <ArrowRight size={13}/></a></div></section></main><footer className="footer"><div className="footer-inner"><span>© 2026 Sarah Pardeshi · StudyHub</span><a href="#top">Back to top ↑</a></div></footer></>;
+function StudySpace() {
+  return (
+    <div className="study-space" aria-label="StudyHub study guide preview">
+      <div className="study-space-bar"><span className="mini-brand"><BookOpen size={15} /> studyhub</span><span>My learning space</span></div>
+      <div className="study-space-body">
+        <span className="study-space-label">YOUR STUDY GUIDE</span>
+        <h3>Introduction to neural networks</h3>
+        <p>A clear path through the fundamentals, with resources and a quiz to help you put ideas into practice.</p>
+        <div className="study-space-items"><span><BookOpen /> 6 short sections</span><span><CircleHelp /> A quick knowledge check</span><span><Sparkles /> Ask the Study Buddy</span></div>
+      </div>
+    </div>
+  );
+}
+
+export default function Home() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const update = () => {
+      const page = document.documentElement;
+      setProgress(page.scrollHeight - page.clientHeight ? page.scrollTop / (page.scrollHeight - page.clientHeight) : 0);
+    };
+    window.addEventListener("scroll", update, { passive: true });
+    return () => window.removeEventListener("scroll", update);
+  }, []);
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => { if (event.key === "Escape") setMenuOpen(false); };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
+
+  const closeMenu = () => setMenuOpen(false);
+
+  return (
+    <>
+      <div className="progress" style={{ transform: `scaleX(${progress})` }} />
+      <nav className="site-nav">
+        <div className="nav-inner">
+          <a className="brand" href="#top" aria-label="StudyHub home"><span className="brand-mark"><BookOpen /></span>StudyHub</a>
+          <button className="menu-toggle" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X /> : <Menu />}</button>
+          <div className={`nav-links ${menuOpen ? "open" : ""}`}>
+            <a href="#overview" onClick={closeMenu}>Overview</a>
+            <a href="#features" onClick={closeMenu}>Features</a>
+            <a href="#technology" onClick={closeMenu}>Technology</a>
+            <a href="#about" onClick={closeMenu}>About Sarah</a>
+            <a className="nav-cta" href="#demo" onClick={closeMenu}><Play size={12} /> Watch demo</a>
+          </div>
+        </div>
+      </nav>
+
+      <main id="top">
+        <section className="video-section" id="demo" aria-label="StudyHub product walkthrough">
+          <div className="container">
+            <VideoPlayer />
+            <div className="video-intro">
+              <span className="section-kicker">A two-minute walkthrough · 02:01</span>
+              <h1>See StudyHub in action.</h1>
+              <p>From a learning question to a study guide, a quiz, and a place to keep it all.</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="hero section" id="overview">
+          <div className="container hero-grid">
+            <div className="hero-copy-block">
+              <span className="section-kicker">An AI-powered learning experience</span>
+              <h2>Stop searching.<br /><span>Start learning.</span></h2>
+              <p>StudyHub turns a topic search into a structured, interactive learning experience, bringing study material, questions, and useful resources together.</p>
+              <a className="button primary" href="#features">Explore the platform <ArrowRight size={15} /></a>
+              <div className="creator">Designed &amp; developed by <strong>Sarah Pardeshi</strong></div>
+            </div>
+            <StudySpace />
+          </div>
+        </section>
+
+        <section className="section" id="features">
+          <div className="container">
+            <div className="section-heading"><span className="section-kicker">The learning space</span><h2>Everything in one place.</h2><p>Each part of the experience is designed to help you stay with the subject you came to learn.</p></div>
+            <div className="feature-list">
+              {features.map(({ icon: Icon, title, body }, index) => (
+                <article className="feature-row" key={title}><span className="feature-number">0{index + 1}</span><span className="feature-icon"><Icon /></span><div><h3>{title}</h3><p>{body}</p></div></article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section story-section">
+          <div className="container story-grid">
+            <article className="story-panel"><span className="section-kicker">Before</span><h2>Too many tabs.<br />Too little momentum.</h2><p>Learning something new can mean switching between search results, videos, books, and notes before the learning even begins.</p><div className="tabs-scattered"><span>Search results · neural networks</span><span>Video lecture · 18 min</span><span>Book chapter · AI</span><span>Study notes (draft)</span><span>Quiz questions</span></div></article>
+            <article className="story-panel solution-panel"><span className="section-kicker">With StudyHub</span><h2>A place to follow<br />the thread.</h2><p>Study guides, quizzes, helpful resources, and AI-assisted explanations share one connected learning space.</p><div className="organized-ui"><div className="ui-head">Neural networks · Study guide</div><div className="ui-line"><i /> Foundations · 6 sections</div><div className="ui-line"><i /> Knowledge check · 8 questions</div><div className="ui-line"><i /> Study Buddy · follow-up chat</div></div></article>
+          </div>
+        </section>
+
+        <section className="section" id="technology">
+          <div className="container tech-grid">
+            <div className="tech-copy"><span className="section-kicker">Under the surface</span><h2>Built with technology.<br />Designed around people.</h2><p>A familiar web stack and generative AI come together to organise a more approachable learning experience.</p><div className="tech-list"><span>MongoDB</span><span>Express.js</span><span>React.js</span><span>Node.js</span><span>Generative AI / LLM API</span></div></div>
+            <div className="flow" aria-label="Product architecture flow"><div className="flow-row"><div className="flow-node"><GraduationCap /><span>User input</span></div><i>→</i><div className="flow-node"><Code2 /><span>React frontend</span></div><i>→</i><div className="flow-node"><Zap /><span>Node.js / Express</span></div></div><div className="flow-bottom"><div className="flow-node"><Brain /><span>AI integration</span></div><i>→</i><div className="flow-node"><BookOpen /><span>Structured learning · MongoDB</span></div></div><p className="flow-note">From a learning question to a connected study experience.</p></div>
+          </div>
+        </section>
+
+        <section className="section dev-section" id="about">
+          <div className="container"><div className="section-heading"><span className="section-kicker">The person behind StudyHub</span><h2>Meet Sarah.</h2></div>
+            <div className="dev-card"><aside className="dev-aside"><div className="avatar-art">SP</div><h3>Sarah Pardeshi</h3><p>Computer Science undergraduate<br />AI/ML · Python · Machine Learning</p><div className="social-links"><a href="https://linkedin.com/in/sarah-pardeshi" target="_blank" rel="noreferrer" aria-label="Sarah on LinkedIn"><Linkedin /></a><a href="https://github.com/Sarahpardeshi" target="_blank" rel="noreferrer" aria-label="Sarah on GitHub"><Github /></a></div></aside>
+              <div className="dev-main"><h3>Curiosity, turned into software.</h3><p>I&apos;m a Computer Science undergraduate interested in building practical AI-powered applications and intelligent software systems. I enjoy exploring how emerging technologies can solve everyday problems through thoughtful engineering and user-focused design.</p><div className="skill-pills"><span>AI/ML &amp; Generative AI</span><span>Python &amp; Machine Learning</span><span>MERN Stack Development</span><span>AI-powered applications</span><span>Problem-solving &amp; experimentation</span></div><div className="academic"><div>Somaiya Vidyavihar University<span>B.Sc. Computer Science Honours</span></div><div>Graduation · 2027<span>CGPA · 9.77</span></div></div></div>
+            </div>
+          </div>
+        </section>
+
+        <section className="section projects-section"><div className="container"><div className="section-heading"><span className="section-kicker">A few more things I’ve built</span><h2>More experiments.<br />More problem-solving.</h2></div><div className="projects-grid"><article className="project-card"><span>Machine learning</span><h3>Online Payment Fraud Prediction</h3><p>Random Forest-based fraud detection, with feature engineering, preprocessing, and evaluation using precision, recall, F1-score, and a confusion matrix.</p></article><article className="project-card"><span>Real-time collaboration</span><h3>Video Conferencing Platform</h3><p>A MERN-based application with WebRTC, Socket.io, video calls, chat, screen sharing, and collaborative features.</p></article></div></div></section>
+
+        <section className="cta-section"><div className="container"><span className="section-kicker">Get in touch</span><h2>Curious about what we could build next?</h2><p>I&apos;m always interested in exploring new ideas, building intelligent systems, and solving meaningful problems with technology.</p><div className="cta-actions"><a className="button primary" href="https://linkedin.com/in/sarah-pardeshi" target="_blank" rel="noreferrer">Connect on LinkedIn <Linkedin size={14} /></a><a className="button" href="https://github.com/Sarahpardeshi" target="_blank" rel="noreferrer">Explore GitHub <Github size={14} /></a><a className="button" href="mailto:sarahpardeshi09@gmail.com">Email Sarah <ArrowRight size={14} /></a></div></div></section>
+      </main>
+      <footer className="footer"><div className="footer-inner"><span>© 2026 Sarah Pardeshi · StudyHub</span><a href="#top">Back to top ↑</a></div></footer>
+    </>
+  );
 }
