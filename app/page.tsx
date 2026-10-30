@@ -210,6 +210,12 @@ export default function Home() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, []);
 
+  useEffect(() => {
+    if (window.location.hash === "#demo") {
+      window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
+    }
+  }, []);
+
   const closeMenu = () => setMenuOpen(false);
 
   return (
@@ -231,7 +237,7 @@ export default function Home() {
       <main id="top">
         <section className="portfolio-hero">
           <div className="container portfolio-grid">
-            <div className="featured-video" id="demo">
+            <div className="featured-video">
               <VideoPlayer />
               <div className="video-caption"><span>FEATURED PROJECT · STUDYHUB</span><span>PRODUCT WALKTHROUGH&nbsp; 02:01</span></div>
             </div>
